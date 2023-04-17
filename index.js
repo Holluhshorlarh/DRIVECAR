@@ -1,7 +1,7 @@
 const app = require("./app");
 
 app.get("/", (req, res) => {
-    res.write("Hello world")
+    res.write("Hello world!")
     res.end()
 })
 
