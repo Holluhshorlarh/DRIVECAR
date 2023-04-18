@@ -8,5 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+const router = require('./router/user.router');
+app.use('/api/v1', router);
 
 module.exports = app;
