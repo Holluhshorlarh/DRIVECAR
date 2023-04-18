@@ -3,36 +3,18 @@ const validateIdNumber = (value) => {
     return idNumberRegex.test(value);
   };
   
-  const userSchema = new mongoose.Schema(
-    {
-      firstName: {
-        type: String,
-        required: true,
-      },
-      middleName: {
-        type: String,
-        default: null,
-      },
-      lastName: {
-        type: String,
-        required: true,
-      },
-      idType: {
-        type: String,
-        enum: ["international passport", "drivers license", "voters card"],
-        required: true,
-      },
-      idNumber: {
-        type: String,
-        required: true,
-        validate: [validateIdNumber, "Invalid ID number"],
-      },
-    },
-    {
-      timestamps: true,
-    }
-  );
+  const mongoose = require('mongoose');
+
+  const userSchema = new mongoose.Schema({
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    idNumber: {type: String,enum: ['International Passport', 'Drivers license', 'Voters card'], 
+    required: true, validate: [validateIdNumber, "Invalid ID number"]},
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+  });
   
-  const User = mongoose.model("User", userSchema);
-  
-  module.exports = User;  
+  module.exports = mongoose.model('User', userSchema);
