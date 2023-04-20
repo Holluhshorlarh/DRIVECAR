@@ -7,7 +7,7 @@ const { MONGO_URI } = process.env;
   useUnifiedTopology: true,
 })
 .then(() => {
-  console.log("Successfully connected to database");
+  console.log("Successfully connected to mongodb");
 })
 .catch((error) => {
     console.log("error connecting to Database");
