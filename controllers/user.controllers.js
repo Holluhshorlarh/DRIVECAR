@@ -72,6 +72,54 @@ exports.userLogin = async (req, res) => {
   }
 };
 
+// Find user
+exports.findUser = async (req, res) => {
+  try {
+    // Check if authenticated user is admin or is accessing their own information
+    if (!req.user.isAdmin && req.params.userId !== req.user.id) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    // Find user by ID
+    const userToFind = await UserModel.findById(req.params.userId);
+
+    // Check if user exists
+    if (!userToFind) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Return user information
+    return res.status(200).json(userToFind);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+//update user information
+exports.updateUser = async (req, res) => {
+  try {
+    // Check if authenticated user is admin or is updating their own information
+    if (!req.user.isAdmin && req.params.userId !== req.user.id) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    // Check if user with given id exists
+    const userToUpdate = await UserModel.findById(req.params.userId);
+    if (!userToUpdate) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update user information
+    Object.assign(userToUpdate, req.body); // only updates firstName and email properties
+    await userToUpdate.save();
+    return res.status(200).json({ message: 'User information updated' });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 // Soft delete user by setting isActive property to false
 exports.softDeleteUser = async (req, res) => {
   try {
@@ -96,3 +144,4 @@ exports.softDeleteUser = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 };
+
