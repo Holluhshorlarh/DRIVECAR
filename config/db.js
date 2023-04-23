@@ -1,17 +1,36 @@
 const mongoose = require("mongoose");
-
 const { MONGO_URI } = process.env;
+const { Pool } = require('pg');
 
- exports.connect = () => mongoose.connect(MONGO_URI, {
+// mongodb connection
+ exports.connectDB = async () => { 
+  try {
+  const connection = await mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => {
-  console.log("Successfully connected to mongodb");
-})
-.catch((error) => {
-    console.log("error connecting to Database");
-    console.error(error)
-})
+  console.log("Connected to MongoDb")
+} catch(error) {
+    console.error(error);
+}
+ }
 
+// postgres connection
 
+exports.pool = new Pool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+});
+
+// otherModule.js
+const { pool } = require('./db');
+
+pool.connect((error) => {
+  if (error) {
+      throw error;
+  }
+  console.log('Connected to postgres');
+});
