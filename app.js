@@ -42,6 +42,7 @@ app.set('view engine', 'hbs');
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 //static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
