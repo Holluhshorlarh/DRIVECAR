@@ -2,6 +2,8 @@ const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const passport = require("passport");
+const morgan = require("morgan");
+const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 const { connectDB } = require("./config/db");
@@ -15,6 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+app.use(morgan('dev'));
+
 
 // Session
 app.use(session({
@@ -31,6 +35,9 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
+//static folder
+app.use(express.static(path.join(__dirname, 'public')))
+
 // Passport
 require("./config/passport")(passport);
 app.use(passport.initialize());
@@ -38,7 +45,6 @@ app.use(passport.session());
 
 // Routes
 app.use('/', require('./routes/index'));
-app.use('/auth', require('./router/auth'));
 
 // Connect to MongoDB
 connectDB();

@@ -1,16 +1,20 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-// Description: Login/ landing page
-// route GET /
+// Description: Login/Landing page
+//Route: GET/
 router.get('/', (req, res) => {
-    res.render('login')
+    res.render('login', {
+        layout: 'login',
+    })
 })
 
 // Description: Dashboard
-// route GET /dashboard
+//Route: GET/dashboard
 router.get('/dashboard', (req, res) => {
-    res.send('dashboard')
+    res.render('dashboard')
 })
 
-module.exports = router;
+
+
+module.exports = router
