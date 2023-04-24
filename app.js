@@ -12,6 +12,9 @@ require("dotenv").config()
 const app = express();
 const port = process.env.PORT
 
+//passport config
+require("./config/passport")(passport);
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,16 +38,16 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
-//static folder
-app.use(express.static(path.join(__dirname, 'public')))
-
-// Passport
-require("./config/passport")(passport);
+// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
+//static folder
+app.use(express.static(path.join(__dirname, 'public')))
+
 // Routes
 app.use('/', require('./routes/index'));
+app.use('/auth', require('./routes/auth'));
 
 // Connect to MongoDB
 connectDB();
