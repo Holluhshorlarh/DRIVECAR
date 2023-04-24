@@ -1,9 +1,9 @@
+const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const passport = require("passport");
 const morgan = require("morgan");
-const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 const { connectDB } = require("./config/db");
