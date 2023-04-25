@@ -4,6 +4,7 @@ const router = express.Router();
 require("dotenv").config();
 require('../config/facebook');
 
+
 // Description: Auth with Google
 // route: GET auth/google
 router.get('/google', passport.authenticate('google', {scope: ['profile'] }));
@@ -24,13 +25,5 @@ router.get('/facebook/callback', passport.authenticate('facebook', {failureRedir
     res.redirect('/dashboard');
 });
 
-
-
-// Description: Logout User
-// route: /auth/logout
-router.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-});
 
 module.exports = router;
