@@ -1,16 +1,17 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
+const passport = require('passport')
 const User = require('../models/User');
 const dotenv = require('dotenv');
 dotenv.config();
 
-module.exports = function (passport) {
-  passport.use(new FacebookStrategy({
+ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: '/auth/facebook/callback',
-    profileFields: ['id', 'displayName', 'name', 'emails', 'photos']
+    //profileFields: ['id', 'displayName', 'name', 'emails', 'photos']
   }, async (accessToken, refreshToken, profile, done) => {
+    console.log(profile)
     try {
       let user = await User.findOne({ facebookId: profile.id });
       if (user) {
@@ -18,11 +19,7 @@ module.exports = function (passport) {
       }
       const newUser = new User({
         facebookId: profile.id,
-        displayName: profile.displayName,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        email: profile.emails[0].value,
-        image: profile.photos[0].value
+        displayName: profile.displayName
       });
       user = await newUser.save();
       done(null, user);
@@ -41,4 +38,4 @@ module.exports = function (passport) {
       .then(user => done(null, user))
       .catch(error => done(error, null));
   });
-};
+

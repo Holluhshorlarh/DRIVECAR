@@ -3,29 +3,30 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   googleId: {
     type: String,
-    required: true
+  },
+  facebookId: {
+    type: String,
   },
   displayName: {
     type: String,
-    required: true
-  }, 
-   firstName: {
+  },
+  firstName: {
     type: String,
-    required: true
   },
   lastName: {
     type: String,
-    required: true
   },
-    image: {
+  email: {
     type: String,
-    required: true
   },
-  createdAt: {
-    date: { 
-       type: Date,
-       default: Date.now }
-   }
-})
+  gender: {
+    type: String,
+  },
+  image: {
+    type: String,
+  },
+}, {
+  timestamps: true 
+});
 
 module.exports = mongoose.model('User', UserSchema);

@@ -4,17 +4,18 @@ const router = express.Router();
 const { ensureAuth, ensureGuest} = require('../middleware/auth');
 const FacebookStrategy = require('passport-facebook').Strategy;
 require("dotenv").config()
+require('../config/facebook')
 
-passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // Here you can handle the user profile data and create or update a user in your database
-    done(null, profile);
-  }
-));
+// passport.use(new FacebookStrategy({
+//     clientID: process.env.FACEBOOK_APP_ID,
+//     clientSecret: process.env.FACEBOOK_APP_SECRET,
+//     callbackURL: "/auth/facebook/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     // Here you can handle the user profile data and create or update a user in your database
+//     done(null, profile);
+//   }
+// ));
 
 // Description: Auth with Google
 // route: GET auth/google
