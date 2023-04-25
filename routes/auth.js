@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 require("dotenv").config();
-require('../config/facebook');
+require('../controller/facebook');
 
 
 // Description: Auth with Google

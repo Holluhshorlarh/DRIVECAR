@@ -6,14 +6,14 @@ const passport = require("passport");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
-const { connectDB } = require("./config/db");
+const { connectDB } = require("./config/database");
 require("dotenv").config()
 
 const app = express();
 const port = process.env.PORT
 
 //passport config
-require("./config/passport")(passport);
+require("./controller/passport")(passport);
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));

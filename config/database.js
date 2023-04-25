@@ -27,7 +27,7 @@ exports.pool = new Pool({
 });
 
 // otherModule.js
-const { pool } = require('./db');
+const { pool } = require('./database');
 
 pool.connect((error) => {
   if (error) {

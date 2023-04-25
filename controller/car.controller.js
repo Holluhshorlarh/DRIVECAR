@@ -3,7 +3,7 @@ const Car = require('../models/cars');
 
 exports.postCar = async (req, res) => {
   try {
-    const { carName } = req.body;
+    const { carName, rentPrice } = req.body;
     const existingCar = await Car.findOne({ carName });
 
     if (existingCar) {
