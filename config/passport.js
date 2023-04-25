@@ -1,8 +1,8 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const dotenv = require('dotenv');
-dotenv.config();
+const dotenv = require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 module.exports = function(passport) {
   passport.use(new GoogleStrategy({
@@ -13,8 +13,12 @@ module.exports = function(passport) {
     try {
       let user = await User.findOne({ googleId: profile.id });
       if (user) {
-        return done(null, user);
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        console.log(`user is: ${user.username}`);
+        console.log(token);
+        return done(null, user, token);
       } 
+
       const newUser = new User({
         googleId: profile.id,
         displayName: profile.displayName,
@@ -23,6 +27,8 @@ module.exports = function(passport) {
         image: profile.photos[0].value
       });
       user = await newUser.save();
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      console.log({message: token});
       done(null, user);
     } catch (error) {
       console.error(error);
