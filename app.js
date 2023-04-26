@@ -55,5 +55,5 @@ connectDB();
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server is up and running on http://localhost:${port}`);
+  console.log(`Server is up and running on ${port}`);
 });

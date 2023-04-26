@@ -18,7 +18,7 @@ exports.ensureGuest = function (req, res, next) {
 
 exports.isAuth = (req, res, next) => {
   try {
-    const token = headers.Authorization.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[1];
     if (!token) return res.status(403).json({ message: "Unauthorize" });
     const decode = jwt.verify(token, process.env.JWT_SECRET);
     if (!decode) return res.status(401).json({ message: "Unauthorize" });

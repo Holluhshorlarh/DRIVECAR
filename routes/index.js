@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { postCar, updateCar, deleteCar } = require('../controller/car.controller');
+const { postCar, updateCar, deleteCar, getAvailableCars, makePayment } = require('../controller/car.controller');
 const { ensureAuth, ensureGuest} = require('../middleware/auth')
 const { isAuth, isAdmin } = require('../middleware/auth')
 // Description: Login/Landing page
@@ -19,9 +19,11 @@ router.get('/dashboard', ensureAuth, (req, res) => {
 
 // Description: Add, update or delete a car (Admin only)
 //Route: POST/PUT/DELETE /car
-router.post('/car', isAdmin, postCar);
-router.put('/car/:id', isAdmin, updateCar);
-router.delete('/car/:id', isAdmin, deleteCar);
+router.post('/car', isAuth, isAdmin, postCar);
+router.put('/car/:id', isAuth, isAdmin, updateCar);
+router.delete('/car/:id', isAuth, isAdmin, deleteCar);
+router.get('/available-cars', getAvailableCars);
+router.post('/payment', makePayment);
 
 
 module.exports = router

@@ -17,7 +17,7 @@ passport.use(new FacebookStrategy({
   try {
     let user = await User.findOne({ facebookId: profile.id });
     if (user) {
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
       console.log({ message: token });
       return done(null, user, token);
     }

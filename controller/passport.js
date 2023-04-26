@@ -8,13 +8,13 @@ module.exports = function(passport) {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
+    callbackURL: 'https://dcar.herokuapp.com/auth/google/callback'
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       let user = await User.findOne({ googleId: profile.id });
       if (user) {
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        console.log(`user is: ${user.username}`);
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        console.log(`user is: ${user.displayName}`);
         console.log(token);
         return done(null, user, token);
       } 
@@ -27,7 +27,7 @@ module.exports = function(passport) {
         image: profile.photos[0].value
       });
       user = await newUser.save();
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
       console.log({message: token});
       done(null, user);
     } catch (error) {
