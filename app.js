@@ -1,3 +1,4 @@
+require("dotenv").config()
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
@@ -7,7 +8,6 @@ const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
 const { connectDB } = require("./config/database");
-require("dotenv").config()
 
 const app = express();
 const port = process.env.PORT
@@ -16,9 +16,9 @@ const port = process.env.PORT
 require("./controller/passport")(passport);
 
 // Middleware
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
 
