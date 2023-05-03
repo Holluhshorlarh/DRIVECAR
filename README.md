@@ -20,6 +20,17 @@ https://documenter.getpostman.com/view/25826735/2s93eR3aKD
 - Users can hire cars and delete car hire order
 ---
 
+### Endpoints 
+
+- ROUTER.POST('/car', isAuth, isAdmin, postCar); This logic creates cars that will be available for hire to users and takes isAuth middleware to ensure that whoever is performing the operation is logged in, isAdmin for authorization to ensure that the operation can only be performed by an Admin.
+
+- ROUTER.PUT('/car/:id', isAuth, isAdmin, updateCar); this logic was implemented to give room for car information details manipulation and it takes isAuth middleware to ensure that whoever is performing the operation is logged in, isAdmin for authorization to ensure that the operation can only be performed by an Admin.
+
+- ROUTER.DELETE('/car/:id', isAuth, isAdmin, deleteCar);
+router.get('/available-cars', getAvailableCars);
+router.post('/payment', makePayment);
+---
+
 DriveCar is built using the following technologies:
 
 - Node.js: A server-side JavaScript runtime environment used to build the backend of the application.

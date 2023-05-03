@@ -26,4 +26,5 @@ router.get('/facebook/callback', passport.authenticate('facebook', {failureRedir
 });
 
 
+
 module.exports = router;
