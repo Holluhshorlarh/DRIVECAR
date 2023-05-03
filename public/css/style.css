@@ -59,7 +59,7 @@ body {
 }
 
 .form__button {
-  background-color: #3b5998;
+  background-color: #394867;
   border: none;
   border-radius: 0.8rem;
   color: #fff;
@@ -74,7 +74,7 @@ body {
 }
 
 .form__button:hover {
-  background-color: #2d4373;
+  background-color: #394867;
 }
 
 .social {
@@ -92,7 +92,7 @@ body {
 
 .social__button {
   align-items: center;
-  background-color: #3b5998;
+  background-color: #394867;
   border: none;
   border-radius: 0.8rem;
   color: #fff;
@@ -111,7 +111,7 @@ body {
 }
 
 .social__button--facebook:hover {
-  background-color: #2d4373;
+  background-color: #394867;
 }
 
 .social__button i {

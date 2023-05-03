@@ -20,6 +20,20 @@ router.get('/dashboard', ensureAuth, (req, res) => {
     });
 })
 
+// logout route
+router.get('/logout', ensureAuth, (req, res) => {
+    // destroy the session
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // redirect to the home page after logging out
+        res.redirect('/');
+      }
+    });
+  });
+  
+
 // Description: Add, update or delete a car (Admin only)
 // Route: POST/PUT/DELETE /car
 router.post('/car', isAuth, isAdmin, postCar);
