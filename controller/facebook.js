@@ -10,7 +10,7 @@ dotenv.config();
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "https://dcar.herokuapp.com/facebook/callback",
+  callbackURL: "https://dcar.herokuapp.com/authenticate/facebook",
 }, async (accessToken, refreshToken, profile, done) => {
   console.log(profile);
   try {
