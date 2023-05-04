@@ -17,11 +17,11 @@ router.get("/google/callback", passport.authenticate('google', {failureRedirect:
 
 // Description: Auth with Facebook
 // route: GET auth/facebook
-router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/facebook', passport.authenticate('facebook'));
 
 // Description: Facebook auth callback
 // route: GET auth/facebook/callback
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/'}), (req, res) => {
+router.get('/auth/facebook', passport.authenticate('facebook', {failureRedirect: '/'}), (req, res) => {
     res.redirect('/dashboard');
 });
 
