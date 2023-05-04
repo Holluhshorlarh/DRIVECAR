@@ -11,7 +11,7 @@ router.get('/google', passport.authenticate('google', {scope: ['profile'] }));
 
 // Description: Google auth callback
 // route: GET auth/google/callback
-router.get("http://dcar.herokuapp.com/auth/google/callback", passport.authenticate('google', {failureRedirect: '/'}), (req, res) => {
+router.get("/auth/google/redirect", passport.authenticate('google', {failureRedirect: '/'}), (req, res) => {
     res.redirect('/dashboard');
 });
 
@@ -21,7 +21,7 @@ router.get('/facebook', passport.authenticate('facebook'));
 
 // Description: Facebook auth callback
 // route: GET auth/facebook/callback
-router.get('http://dcar.herokuapp.com/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/'}), (req, res) => {
+router.get('/facebook/redirect', passport.authenticate('facebook', {failureRedirect: '/'}), (req, res) => {
     res.redirect('/dashboard');
 });
 
