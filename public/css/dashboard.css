@@ -28,6 +28,10 @@
     border-right: .15em solid whitesmoke; /* blinking cursor */
     animation: typing 1s steps(30), blink-caret .5s step-end infinite;
   }
+  .swiper{
+    width:100%;
+  }
+
   
   /* typing animation */
   @keyframes typing {
