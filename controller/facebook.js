@@ -1,16 +1,16 @@
+require("dotenv").config();
 const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require('../models/user');
-const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 
-dotenv.config();
 
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "https://dcar.herokuapp.com/facebook/callback"
+  callbackURL: "https://dcar.herokuapp.com/auth/facebook/callback",
+  enableProof: true
 }, async (accessToken, refreshToken, profile, done) => {
   console.log(profile);
   try {
