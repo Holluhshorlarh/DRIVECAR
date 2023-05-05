@@ -21,10 +21,8 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 
 // Description: Facebook auth callback
 // route: GET auth/facebook/callback
-router.get('/auth/facebook', passport.authenticate('facebook', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/'
-}));
-
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), (req, res) => {
+  res.redirect('/dashboard');
+});
 
 module.exports = router;
