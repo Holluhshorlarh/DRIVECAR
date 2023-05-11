@@ -11,6 +11,17 @@ const MongoStore = require("connect-mongo");
 const messagesMiddleware = require('./middleware/messagesMiddleware');
 const { connectDB } = require("./config/database");
 const dashboardController = require('./controller/dashboardController');
+const fs = require('fs');
+
+
+
+// Create the logs directory if it doesn't exist
+const logsDir = path.join(__dirname, 'logs');
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir);
+}
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.log'), { flags: 'a' });
 
 const app = express();
 const port = process.env.PORT;
@@ -23,7 +34,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
-app.use(morgan('dev'));
+app.use(morgan('combined', { stream: accessLogStream }));
 
 // session
 app.use(session({
