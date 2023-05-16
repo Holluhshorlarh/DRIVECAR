@@ -6,11 +6,11 @@ require('../controller/facebook');
 
 // Description: Auth with Google
 // route: GET auth/google
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 // Description: Google auth callback
 // route: GET auth/google/callback
-router.get("/google/callback", passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+router.get("/auth/google/callback", passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
     res.redirect('/dashboard');
 });
 
