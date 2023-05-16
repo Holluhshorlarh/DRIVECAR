@@ -26,9 +26,6 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.l
 const app = express();
 const port = process.env.PORT;
 
-// passport config
-require("./controller/passport")(passport);
-
 // middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
