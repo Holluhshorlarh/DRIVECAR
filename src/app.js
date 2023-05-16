@@ -40,7 +40,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized:true.valueOf,
   store: MongoStore.create({ 
     mongoUrl: process.env.MONGO_URI,
     collectionName: 'sessions',
