@@ -3,7 +3,11 @@ const passport = require('passport');
 const router = express.Router();
 require("dotenv").config();
 require('../controller/facebook');
+const facebookStrategy = require('../path/to/facebook-strategy-file');
 
+
+// Use the Facebook authentication strategy
+passport.use(facebookStrategy);
 
 // Description: Auth with Google
 // route: GET auth/google

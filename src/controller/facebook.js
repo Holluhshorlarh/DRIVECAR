@@ -5,7 +5,7 @@ const passport = require('passport');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
-
+// Define the Facebook authentication strategy
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
@@ -33,6 +33,7 @@ passport.use(new FacebookStrategy({
   }
 }));
 
+// Serialize and deserialize user
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -42,3 +43,6 @@ passport.deserializeUser((id, done) => {
     .then(user => done(null, user))
     .catch(error => done(error, null));
 });
+
+// Export the Facebook authentication strategy
+module.exports = passport;
