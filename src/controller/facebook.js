@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "https://dcar.herokuapp.com//auth/facebook/callback"
+  callbackURL: "https://dcar.herokuapp.com/auth/facebook/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   console.log(profile);
   try {
