@@ -3,15 +3,17 @@ const path = require("path");
 const express = require("express");
 const ejs = require("ejs");
 const passport = require("passport");
+const session = require("express-session");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
-const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const messagesMiddleware = require('./middleware/messagesMiddleware');
 const { connectDB } = require("./config/database");
 const dashboardController = require('./controller/dashboardController');
 const fs = require('fs');
+require('./config/passport')(passport)
+
 
 
 

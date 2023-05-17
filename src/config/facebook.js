@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: process.env.FACEBOOK_CALL_BACK_URL
+  callbackURL: '/auth/facebook/callback'
 }, async (accessToken, refreshToken, profile, done) => {
   console.log(profile);
   try {
