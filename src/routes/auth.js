@@ -4,9 +4,9 @@ const router = express.Router();
 require("dotenv").config();
 require('../controller/facebook');
 
-// // Description: Auth with Google
-// // route: GET auth/google
-// router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+// Description: Auth with Google
+// route: GET auth/google
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 // Description: Google auth callback
 // route: GET auth/google/callback
@@ -14,9 +14,9 @@ router.get("/auth/google/", passport.authenticate('google', { failureRedirect: '
     res.redirect('/dashboard');
 });
 
-// // Description: Auth with Facebook
-// // route: GET auth/facebook
-// router.get('/auth/facebook', passport.authenticate('facebook'));
+// Description: Auth with Facebook
+// route: GET auth/facebook
+router.get('/auth/facebook', passport.authenticate('facebook'));
 
 // Description: Facebook auth callback
 // route: GET auth/facebook/callback
