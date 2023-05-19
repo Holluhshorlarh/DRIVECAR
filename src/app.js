@@ -62,9 +62,11 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
-app.use('/', require('./routes/index'));
-app.use('/auth', require('./routes/auth'));
+app.use('/', require('./routes/index.routes'));
+app.use('/auth', require('./routes/auth.routes'));
 app.get('/dashboard', dashboardController.dashboard);
+app.use('/', require('./routes/user.routes'));
+
 
 // connect to MongoDB
 connectDB();

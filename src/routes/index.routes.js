@@ -4,6 +4,8 @@ const { postCar, updateCar, deleteCar, getAvailableCars, makePayment } = require
 const { ensureAuth, ensureGuest} = require('../middleware/auth')
 const { isAuth, isAdmin } = require('../middleware/auth')
 
+
+
 // Description: Login/Landing page
 // Route: GET/
 router.get('/', ensureGuest, (req, res) => {
@@ -33,6 +35,7 @@ router.get('/logout', ensureAuth, (req, res) => {
     });
   });
   
+
 
 // Description: Add, update or delete a car (Admin only)
 // Route: POST/PUT/DELETE /car

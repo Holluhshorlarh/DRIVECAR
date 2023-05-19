@@ -3,6 +3,14 @@ const passport = require('passport');
 const router = express.Router();
 require("dotenv").config();
 require('../config/facebook');
+// const { validateSignup, validateLogin } = require('../middleware/user.authentication');
+// const { signUp, login } = require('../controller/email.signup');
+
+
+// //User email signup
+// router.post("/user/signup", signUp);
+// router.post("/user/login", login);
+
 
 // Description: Auth with Google
 // route: GET auth/google
