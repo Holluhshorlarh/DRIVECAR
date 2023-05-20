@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 const passwordService = {
     comparePassword: async (password, hashedPassword) => {

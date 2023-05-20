@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const UserServices = require('../services/user.services')
 const User = require('../models/user')
 const { comparePassword, hashedPassword } = require('../helper/compare.password');
-const { generateToken, setTokenCookie } = require('../helper/jwt');
-
 
 exports.signUp = async (req, res) => {
   let { firstName, lastName, email, password, gender, age } = req.body
@@ -37,9 +36,9 @@ exports.login = async (req, res) => {
         .json({ message: "User does not exist, please sign up" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
 
     const tokenData = {
