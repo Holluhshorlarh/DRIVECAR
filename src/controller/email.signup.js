@@ -53,7 +53,7 @@ exports.login = async (req, res) => {
     };
 
     const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRE,
+      expiresIn: 60 * 60,
     });
 
     res.cookie("access-token", token);
