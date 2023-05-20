@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const UserServices = require('../services/user.services')
 const User = require('../models/user')
+const { comparePassword, hashedPassword } = require('../helper/compare.password');
+const { generateToken, setTokenCookie } = require('../helper/jwt');
 
 
 exports.signUp = async (req, res) => {
@@ -12,11 +12,7 @@ exports.signUp = async (req, res) => {
     if (userExist) {
       return res.status(400).json({ message: 'User already exist' })
     }
-    // hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashpwd = await bcrypt.hash(password, salt);
-    password = hashpwd;
-
+    password = await hashedPassword(password);
     let payload = { firstName, lastName, email, password, gender, age }
     const user = await UserServices.createUser(payload);
     return res.status(201).json({
@@ -53,7 +49,7 @@ exports.login = async (req, res) => {
     };
 
     const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
-      expiresIn: 60 * 60,
+      expiresIn: process.env.JWT_EXPIRE,
     });
 
     res.cookie("access-token", token);
