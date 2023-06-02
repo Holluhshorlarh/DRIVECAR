@@ -65,7 +65,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index.routes'));
 app.use('/auth', require('./routes/auth.routes'));
 app.get('/dashboard', dashboardController.dashboard);
-app.use('/', require('./routes/user.routes'));
 
 
 // connect to MongoDB

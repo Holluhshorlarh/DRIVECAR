@@ -3,14 +3,12 @@ const passport = require('passport');
 const router = express.Router();
 require("dotenv").config();
 require('../config/facebook');
-// const { validateSignup, validateLogin } = require('../middleware/user.authentication');
-// const { signUp, login } = require('../controller/email.signup');
+const { validateLogin } = require('../middleware/user.authentication');
+const { login } = require('../controller/email.signup');
+const { dashboard } = require('../controller/dashboardController');
 
-
-// //User email signup
-// router.post("/user/signup", signUp);
-// router.post("/user/login", login);
-
+// User login route
+router.post("/user/login", validateLogin, login);
 
 // Description: Auth with Google
 // route: GET auth/google
@@ -19,9 +17,8 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 // Description: Google auth callback
 // route: GET auth/google/callback
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
-    res.redirect('/dashboard');
-}
-)
+  res.redirect('/dashboard');
+});
 
 // Description: Auth with Facebook
 // route: GET auth/facebook
@@ -31,7 +28,6 @@ router.get('/facebook', passport.authenticate('facebook'));
 // route: GET auth/facebook/callback
 router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), (req, res) => {
   res.redirect('/dashboard');
-}
-)
+});
 
 module.exports = router;
